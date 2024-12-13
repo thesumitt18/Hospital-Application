@@ -62,25 +62,20 @@ const loginPatient = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        // Check if patient exists
         const patient = await Patient.findOne({ where: { email }, raw:true });
-        // console.log(patient);
         if (!patient) {
             return res.status(404).json({ message: 'Patient not found.' });
         }
 
-        // Compare the password
         const isMatch = await bcrypt.compare(password, patient.password);
         if (!isMatch) {
             return res.status(400).json({ message: 'Invalid password.' });
         }
 
-        // Check if the email is verified
         if (!patient.isVerified) {
             return res.status(403).json({ message: 'Please verify your email before logging in.' });
         }
 
-        // Generate a JWT token for the patient
         const token = jwt.sign({ id: patient.id }, 'sumit', { expiresIn: '1h' });
 
         res.status(200).json({
@@ -94,7 +89,21 @@ const loginPatient = async (req, res) => {
     }
 };
 
+const getPatientDetails = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const patient = await Patient.findByPk(id);
+        if (!patient) {
+            return res.status(404).json({ message: 'Patient not found.' });
+        }
+        res.status(200).json(patient);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 module.exports = {
     registerPatient,
     loginPatient,
+    getPatientDetails,
 };

@@ -1,0 +1,137 @@
+/* Chat Container */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  width: 90%;
+  max-width: 550px;
+  margin: 10px auto;
+  border: 1px solid #dfdada;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+/* Chat Header */
+.chat-header {
+  background-color: rgb(80, 24, 0.74);
+  color: #fff;
+  padding: 0 15px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bolder;
+}
+
+/* Chat History */
+.chat-history {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  max-width: 70%;
+  padding: 5px 15px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  position: relative;
+  word-break: break-word;
+
+}
+
+/* 
+.message {
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 70%;
+  padding: 5px 15px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  position: relative;
+} */
+
+
+/* Sent Message */
+.message.sent {
+  align-self: flex-end;
+  background-color: #d1f1d1;
+  color: #333;
+}
+
+/* Received Message */
+.message.received {
+  align-self: flex-start;
+  background-color: #e8e8e8;
+  color: #333;
+}
+
+/* Timestamp */
+.timestamp {
+  font-size: 0.8rem;
+  color: gray;
+  text-align: right;
+  margin-top: 4px;
+  align-self: flex-end; /* Align the timestamp to the right of the message */
+}
+
+/* Chat Footer */
+.chat-footer {
+  display: flex;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-top: 1px solid #ddd;
+}
+
+.chat-footer input {
+  flex: 1;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-right: 10px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.chat-footer input:focus {
+  border-color: #007bff;
+}
+
+.chat-footer button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.chat-footer button:hover {
+  background-color: #0056b3;
+}
+
+/* Scrollbar Styling */
+.chat-history::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-history::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
+}
+
+.chat-history::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
+}

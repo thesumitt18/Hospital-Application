@@ -24,13 +24,11 @@ const Register = () => {
     { value: 'pediatrics', label: 'Pediatrics' },
     { value: 'orthopedics', label: 'Orthopedics' },
     { value: 'neurology', label: 'Neurology' },
-    // Add more specializations as needed
   ];
 
   useEffect(()=> {
     return () => {
       clearTimeout(timeoutID);
-      // console.log('Timeout cleared');
     };
   }, [timeoutID]);
 

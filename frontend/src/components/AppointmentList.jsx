@@ -15,6 +15,8 @@ import {
 } from '@mui/material';
 import http from './axiosInstance';
 import generateMeetingLink from "../utils/ZoomLinkGenerator"
+import { useNavigate } from 'react-router-dom';
+
 
 const AppointmentList = () => {
   const [appointments, setAppointments] = useState([]);
@@ -23,6 +25,7 @@ const AppointmentList = () => {
   const [openAcceptPopup, setOpenAcceptPopup] = useState(false);
   const [link, setLink] = useState('');
   const [appointmentId, setAppointmentId] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchAppointments();
@@ -31,9 +34,8 @@ const AppointmentList = () => {
   const fetchAppointments = async () => {
     try {
       const doctorId = localStorage.getItem('id');
-      console.log('Fetching appointments for doctorId:', doctorId); 
       const response = await http.get(`/consultations/doctor/${doctorId}`);
-      console.log('API response:', response); 
+      
       if (!response || !response.consultations) {
         console.error('API response does not contain consultations:', response);
         setError('No appointments available.');
@@ -74,11 +76,10 @@ const AppointmentList = () => {
         status: 'confirmed',
         meetingLink: link,
       });
-      // console.log('Accept response:', response); // Debugging API response
 
       if (response) {
         console.error('Failed to accept consultation. Status:', response.status);
-        // Update state for accepted appointment
+        
         setAppointments((prevAppointments) =>
           prevAppointments.map((appointment) =>
             appointment.id === appointmentId
@@ -104,10 +105,10 @@ const AppointmentList = () => {
         const response = await http.patch(`/consultations/status/${appointmentId}`, {
           status: 'rejected',
         });
-        console.log('Reject response:', response); // Debugging API response
+        // console.log('Reject response:', response); // Debugging API response
 
         if (response) {
-          console.error('Failed to reject consultation. Status:', response.status);
+          // console.error('Failed to reject consultation. Status:', response.status);
           // Update state for rejected appointment
           setAppointments((prevAppointments) =>
             prevAppointments.map((appointment) =>
@@ -122,14 +123,14 @@ const AppointmentList = () => {
         }
 
       } catch (err) {
-        console.error('Error while rejecting consultation:', err); // Debugging API error
+        console.error('Error while rejecting consultation:', err); 
       }
     }
   };
 
   // If no appointments are available
   if (appointments.length === 0) {
-    console.log('No appointments found.'); // Debugging empty list
+    console.log('No appointments found.'); 
     return (
       <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
         <Typography variant="h6" color="textSecondary">No appointments available.</Typography>
@@ -236,9 +237,20 @@ const AppointmentList = () => {
                     </>
                   )}
                   {appointment.status === 'Confirmed' && (
-                    <Button variant="contained" disabled>
-                      Completed
-                    </Button>
+                    <>
+                      <Button variant="contained" disabled>
+                        Completed
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                          navigate(`/chat/doctor/${appointment.patientId}${appointment.doctorId}`);
+                        }}
+                      >
+                        Chat
+                      </Button>
+                    </>
                   )}
                   {appointment.status === 'Rejected' && (
                     <Button variant="contained" disabled>
@@ -251,6 +263,7 @@ const AppointmentList = () => {
           </Card>
         ))}
       </Box>
+      
       <Dialog open={openAcceptPopup} onClose={() => setOpenAcceptPopup(false)}>
         <DialogTitle>Appointment Link</DialogTitle>
         <DialogContent>
@@ -276,6 +289,7 @@ const AppointmentList = () => {
             Send Link
           </Button>
         </DialogActions>
+        
       </Dialog>
     </div>
   );

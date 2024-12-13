@@ -14,7 +14,6 @@ const VerifyEmail = () => {
             const queryParams = new URLSearchParams(location.search);
             const token = queryParams.get('token');
             const code = queryParams.get('code');
-            console.log(code);
             
             if (!token) {
                 toast.error('Invalid verification link.');
@@ -24,9 +23,7 @@ const VerifyEmail = () => {
 
             try {
                 const userRole = code === 101 ? 'patient' : 'doctor'
-                // Call the verification API
                 const response = await http.post(`/${userRole}/verify-email?token=${token}`);
-                console.log(response);
                 if (response.status === 200) {
                     setTimeout(() => {
                         toast.success('Email verified successfully!');
@@ -36,7 +33,6 @@ const VerifyEmail = () => {
                     toast.error('Email verification failed.');
                 }
             } catch (error) {
-                // console.log(error);
                 toast.error(error.response?.data?.message || 'Verification failed.');
                 
             } finally {

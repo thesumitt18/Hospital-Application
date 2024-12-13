@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const path = require('path');
 const sendMail = require('../utils/nodemailer');
+const { get } = require('http');
 
 const registerDoctor = async (req, res) => {
     const { name, email, password, specialization } = req.body;
@@ -93,9 +94,24 @@ const getAllDoctors = async (req, res) => {
 };
 
 
+const getDoctorDetail = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const doctor = await Doctor.findByPk(id);
+        if (!doctor) {
+            return res.status(404).json({ message: 'Doctor not found.' });
+        }
+        res.status(200).json(doctor);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};  
+
+
 
 module.exports = {
     registerDoctor,
     loginDoctor,
-    getAllDoctors
+    getAllDoctors,
+    getDoctorDetail
 };

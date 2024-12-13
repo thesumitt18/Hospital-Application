@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, Typography, CircularProgress, Box, Dialog, DialogTitle, DialogContent } from '@mui/material';
+import { Card, CardContent, Typography, Button, CircularProgress, Box, Dialog, DialogTitle, DialogContent } from '@mui/material';
 import http from './axiosInstance';
+import { useNavigate } from 'react-router-dom';
+
 
 const ConsultationsStatus = () => {
   const [consultations, setConsultations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchConsultations();
@@ -72,7 +75,6 @@ const ConsultationsStatus = () => {
               >
 
                 {/* //do this  */}
-                 Left side (20% of vw for image)
                 <Box
                   sx={{
                     display: 'flex',
@@ -141,12 +143,22 @@ const ConsultationsStatus = () => {
                     <strong>Description: </strong>{consultation.description}
                   </Typography>
                   {consultation.status === 'Confirmed' && (
-                    <Typography variant="body1" color="textSecondary" paragraph>
-                      <strong>Meeting Link: </strong>
-                      <a href={consultation.meetingLink} target="_blank" rel="noopener noreferrer">
-                        {consultation.meetingLink}
-                      </a>
-                    </Typography>
+                    <Box display="flex" flexDirection="column" gap={1}>
+                      <Typography variant="body1" color="textSecondary" paragraph>
+                        <strong>Meeting Link: </strong>
+                        <a href={consultation.meetingLink} target="_blank" rel="noopener noreferrer">
+                          {consultation.meetingLink}
+                        </a>
+                      </Typography>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => navigate(`/chat/patient/${consultation.patientId}${consultation.doctorId}`)} 
+                        style={{width: '100px', marginBottom: '10px'}}                    
+                      >
+                        Chat
+                      </Button>
+                    </Box>
                   )}
                   <Typography variant="body1" color="textSecondary">
                     Status: {consultation.status}

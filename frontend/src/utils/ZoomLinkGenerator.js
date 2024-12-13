@@ -1,7 +1,7 @@
-// import crypto from 'crypto';
+
 
 function generateRandomMeetingID() {
-    return Math.floor(10000000000 + Math.random() * 90000000000); // 10-digit number
+    return Math.floor(10000000000 + Math.random() * 90000000000); 
 }
 
 function generateRandomPassword() {
@@ -17,6 +17,3 @@ export default function generateMeetingLink() {
     return meetingLink;
 }
 
-// Generate the link
-// const meetingLink = generateMeetingLink();
-// console.log("Generated Meeting Link:", meetingLink);

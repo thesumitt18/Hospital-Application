@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
+// import ContrastIcon from '@mui/icons-material/Contrast';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
+
+
+
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -57,6 +63,8 @@ const Header = () => {
                 Consultation Status
               </Link>
             )}
+            <DarkModeIcon sx={{marginRight: '5px'}}/>
+            <LightModeIcon sx={{marginRight: '5px'}}/>
 
             <Button variant="outlined" color="inherit" onClick={handleLogout} sx={{ marginLeft: 2 }}>
               Logout

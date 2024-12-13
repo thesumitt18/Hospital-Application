@@ -116,16 +116,13 @@ const DoctorsList = () => {
       })
       .catch((error) => {
         toast.error('Error scheduling consultation');
-        console.error(error);
       });
   };
   
   return (
     <div>
-      {/* Loading Spinner */}
       {loading && <CircularProgress sx={styles.loading} />}
 
-      {/* Error Message */}
       {error && <Typography sx={styles.error}>{error}</Typography>}
 
       {/* Table to display doctor data */}

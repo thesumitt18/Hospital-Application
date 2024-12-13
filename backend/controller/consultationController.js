@@ -6,17 +6,13 @@ const Patient = require('../models/Patient');
 const createConsultation = async (req, res) => {
   try {
       const { patientId, doctorId, dateTime, description } = req.body;
-      // // let images = [];
-      // // console.log(req.files);
-      // if (req.files && req.files.length > 0) {
-      // }
+
       
       if(!req.files || req.files.length === 0) {
         return res.status(400).json({ error: 'No images uploaded' });
       }
       
       imagesPaths = req.files.map(file => file.path).join(',');
-console.log(imagesPaths);
       const consultation = await Consultation.create({
           patientId,
           doctorId,
@@ -47,7 +43,7 @@ const getConsultationsByDoctorId = async (req, res) => {
         },
       ],
     });
-// console.log(consultations);
+
     if (!consultations.length) {
       return res.status(404).json({
         message: `No consultations found for doctorId: ${doctorId}`,
@@ -76,7 +72,6 @@ const getConsultationsByPatientID = async (req, res) => {
                 attributes: ['id', 'name', 'email', 'specialization']
             },
         });
-console.log(consultations); 
         if (!consultations.length) {
             return res.status(404).json({ message: 'No appointments available for this patient.' });
         }
@@ -91,7 +86,6 @@ console.log(consultations);
 const updateConsultationStatus = async (req, res) => {
   const { id } = req.params;
   const { status, meetingLink } = req.body;
-  // console.log(status);
 
   try {
     const consultation = await Consultation.findByPk(id);
