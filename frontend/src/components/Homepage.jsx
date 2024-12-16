@@ -6,6 +6,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { grey } from '@mui/material/colors';
 
 const Homepage = () => {
+  
   return (
     <Box sx={styles.container}>
       {/* Carousel */}

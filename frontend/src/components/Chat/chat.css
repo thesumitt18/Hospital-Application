@@ -47,19 +47,6 @@
 
 }
 
-/* 
-.message {
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 70%;
-  padding: 5px 15px;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  line-height: 1.4;
-  position: relative;
-} */
-
 
 /* Sent Message */
 .message.sent {
@@ -81,7 +68,7 @@
   color: gray;
   text-align: right;
   margin-top: 4px;
-  align-self: flex-end; /* Align the timestamp to the right of the message */
+  align-self: flex-end; 
 }
 
 /* Chat Footer */

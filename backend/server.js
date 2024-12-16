@@ -1,10 +1,10 @@
 const express = require('express');
-const { Server } = require('socket.io'); // Import Socket.IO
-const http = require('http'); // Import HTTP to create the server
-const sequelize = require('./Config/dbconfig'); // Sequelize configuration
+const { Server } = require('socket.io'); 
+const http = require('http'); 
+const sequelize = require('./Config/dbconfig'); 
 const cors = require('cors');
-const bodyParser = require('body-parser'); // Missing import
-const configureSocket = require('./Config/socket'); // Socket.IO configuration file
+const bodyParser = require('body-parser'); 
+const configureSocket = require('./Config/socket'); 
 
 const PORT = 8989;
 
@@ -35,18 +35,18 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: '*', // Update with your frontend origin
+    origin: '*', 
     methods: ['GET', 'POST'],
   },
 });
 
-// Configure Socket.IO
+
 configureSocket(io);
 
 // Sync Sequelize and Start Server
 sequelize.sync() 
   .then(() => {
-    server.listen(PORT, () => { // Use `server.listen` to bind HTTP and Socket.IO
+    server.listen(PORT, () => { 
       console.log(`Server is running on http://localhost:${PORT}`);
     });
   })

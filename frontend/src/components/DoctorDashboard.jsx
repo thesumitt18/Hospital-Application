@@ -6,7 +6,6 @@ import { Box, Typography, Grid, Paper } from '@mui/material';
 const DoctorDashboard = () => {
   return (
     <Box sx={{ padding: 4, backgroundColor: '#f5f5f5', minHeight: '100vh' }}>
-      {/* Welcome Section */}
       <Paper elevation={3} sx={{ padding: 4, marginBottom: 4 }}>
         <Typography variant="h4" component="h1" gutterBottom>
           Welcome, Dr. [Your Name]!
@@ -18,7 +17,6 @@ const DoctorDashboard = () => {
 
       {/* Dashboard Sections */}
       <Grid container spacing={3}>
-        {/* Appointments Section */}
         <Grid item xs={12} md={4}>
           <Paper elevation={3} sx={{ padding: 3 }}>
             <Typography variant="h6" gutterBottom>
@@ -49,7 +47,6 @@ const DoctorDashboard = () => {
               Notifications
             </Typography>
             <Typography variant="body2" color="textSecondary">
-              You have 3 new messages and 2 lab results to review.
             </Typography>
           </Paper>
         </Grid>

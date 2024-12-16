@@ -40,9 +40,9 @@ const Consultation = sequelize.define('Consultation', {
     }
 },{
     sequelize,
-    timestamps: true,  // Optionally, if you want to track createdAt and updatedAt
-    createdAt: 'createdAt', // Optional, explicitly define the timestamp field
-    updatedAt: 'updatedAt', // Optional, explicitly define the timestamp field
+    timestamps: true,  
+    createdAt: 'createdAt', 
+    updatedAt: 'updatedAt', 
 });
 
 Consultation.belongsTo(Patient, {foreignKey:'patientId'});

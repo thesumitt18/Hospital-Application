@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../Config/dbconfig'); // Update with your DB config file path
+const sequelize = require('../Config/dbconfig'); 
 
 const Chat = sequelize.define('Chat', {
   id: {
@@ -31,7 +31,7 @@ const Chat = sequelize.define('Chat', {
   timestamps: false,
   indexes: [
     {
-      unique: false, // Can be true if you want to enforce unique roomId
+      unique: false, 
       fields: ['roomId'],
     }
   ],
